@@ -1,10 +1,6 @@
-# rest-api
+# REST-API's
 
-A website is just a framework to display the content but not actual content. As soon as we start navigating the website the framework starts sending and receiving the contents using REST API's. 
-
-```Client(Mobile App, Web Browser, Smart Watch)```-----------```Rest API```-----------```Data Store```                   
-
-(Make Plant UML Diagram)
+A website is just a framework to display the content but not actual content. As soon as we start navigating the website the framework starts sending and receiving the contents using REST API's.
 
 ```
 "Representational State Transfer (REST) refers to a group of Software Architecture Design Constraint that brings about efficient, reliable, and Scalable systems."
@@ -55,6 +51,7 @@ A website is just a framework to display the content but not actual content. As 
     In other words all URL are URI but not all URI and URL.
 
 ### The Six constraints of REST API's.
+If and only if a web based api's meets these constraints then only it can be called as REST API. 
 
     1. Client-server architecture.
     
@@ -84,4 +81,135 @@ A website is just a framework to display the content but not actual content. As 
         6.4 Hypermedia as the engine of application.
 
 
+### HTTP and REST:
 
+    When a rest service runs on the web over HTTP to give us access to a resources we call it a ```RESTful API```.
+    
+### Anatomy for REST Request.
+
+    In the most basic form REST have two parts:
+        1. Method (POST,GET,UPDATE,PATCH,DELETE,PUT,OPTIONS,HEAD)
+        2. URI (http://www.restful.com/post/5)
+    Working of all the REST methods on the URI at the end depends on the configuration of REST API and the authorization from client.
+
+When sending rest request to the Server, we can also include MetaData with the requests. With the POST/PUT request we should send the Message Body. 
+
+### Discovery of REST API.
+
+Discovering what resources and methods are available and what we can do with them? Even if no documentation is present the rest api will describe itself. 
+
+    Using GET and OPTIONS methods we can walk our way to any resp api resources and methods. 
+
+### Resource and Representation. 
+
+    "Any information that can be name is resource." Resource is conceptual mapping of information.
+    
+    "Rest components performs actions on resource by using a representation to capture the current or intended state of the resource and transfer that representation between states."
+
+Rest server creates a unique representation of that requested resources and even modify the representation to fit the specification.
+
+### REST Methods/Verbs.
+
+1. **POST**
+    Create a new resource and often add it in the collection.
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 201 | Resource **Created**, and return the resource URI with the Response Header. |
+    | 401 | Client is **not authorized** to create a resource. |
+    | 409 | **Conflict**, if the resource already exits. |
+    | 404 | Resource Not found, if the resource is not found. |
+2. **PUT**
+    Update a existing singleton resource based on ID. Unlikely as the POST, PUT resource have the ID of the resource along with the New Data. PUT will replace the current content with the content send along with the PUT request.
+    
+    If the Resource already exits the Content is replaced, else the a new resource is made with the ID specified.(Only Singleton Resource.)
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 200 OK | Resource Updated or **Created**. |
+    | 204 | **No content**, when no content is present. |
+    | 404 | **Resource Not found**, if the resource is not found. |
+    | 401 | Client is **not authorized** to create a resource. |
+    | 405 | **Method Not Allowed**. If PUT is trying to update a collection. |
+
+3. **PATCH**
+    Patch is used to modify a existing resource with replacing the Content.
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 200 OK | Resource Updated or **Created**. |
+    | 204 | **No content**, when no content is present. |
+    | 404 | **Resource Not found**, if the resource is not found. |
+    | 401 | Client is **not authorized** to create a resource. |
+    | 405 | **Method Not Allowed**. If PUT is trying to update a collection. |
+4. **OPTIONS**
+    Get the options available for the Resource.
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 200 OK | **Returned** the description. |
+5. **HEAD**
+    Return just the header from the resource.
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 200 OK | **Returned** the description. |
+    | 404 | **Resource Not found**, if the resource is not found. |
+6. **DELETE**
+    Delete Single Resource. If try to delete a collection will get 405 :** Method Not Allowed** exception.
+7. **GET**
+    Get the resource at the end of the address and send it to the client. Every time we refresh, move forward or backward in the browser, we use GET request.
+    | Response        | Description      |
+    | ------------- |:-------------:|
+    | 200 OK | Resource Received Successfully. |
+    | 404 | **Resource Not found**, if the resource is not found. |
+
+### Response
+
+Any time a client sends a REST request, it gets back the HEAD section from the Server. Every response from the Head Section will have a Head section. 
+
+#### Http Status Code
+
+The HTTP response status code let the client know about the success and the failure of the Request.
+
+| Response | Description |
+| ------------- |:-------------:|
+| 1XX | Information |
+| 2XX | Success |
+| 3XX | Redirection |
+| 4XX | Client Error |
+| 5XX | Server Error |
+
+1. Information Codes. 
+These codes are informational and rarely encountered. Server send these error to client for FYI e.g. I got your request, I got an open connection now.
+
+2. Success Codes.
+
+| Response | Description |
+| ------------- |:-------------:|
+| 200 | **OK**: The request was successful |
+| 201 | **Created**: The request was successful and a new resource was created. |
+| 204 | **No Content**: The request was successful, and no content was send back by server. |
+
+3. Redirection Codes.
+The client was is being provided with a new URI to access the resource. The 300 response set are quite confusing.
+
+| Response | Description |
+| ------------- |:-------------:|
+| 301 | **Moved permanently** |
+| 302/303 | **Found at this other URL** |
+| 307 | **Temporary redirect** |
+| 308 | **Resume incomplete** |
+
+4. Client Error.
+
+| Response | Description |
+| ------------- |:-------------:|
+| 400 | **Bad Request**: Request is malformed, too large or similar |
+| 401 | **Unauthorized**: The Client lack Authorization |
+| 403 | **Forbidden**: Client is not logged in or do not have right permissions |
+| 404 | **Not Found**: If the resource is not found |
+| 405 | **Method Not Allowed**: If the resource does not know the method it is being applied.  |
+
+5. Server Error.
+
+| Response | Description |
+| ------------- |:-------------:|
+| 500 | **Internal Server Error** |
+| 502 | **Bad Gateway** |
+| 503 | **Service Unavailable** |
