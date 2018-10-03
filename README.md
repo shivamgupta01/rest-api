@@ -112,6 +112,7 @@ Rest server creates a unique representation of that requested resources and even
 
 1. **POST**
     Create a new resource and often add it in the collection.
+
     | Response        | Description      |
     | ------------- |:-------------:|
     | 201 | Resource **Created**, and return the resource URI with the Response Header. |
@@ -122,6 +123,7 @@ Rest server creates a unique representation of that requested resources and even
     Update a existing singleton resource based on ID. Unlikely as the POST, PUT resource have the ID of the resource along with the New Data. PUT will replace the current content with the content send along with the PUT request.
     
     If the Resource already exits the Content is replaced, else the a new resource is made with the ID specified.(Only Singleton Resource.)
+
     | Response        | Description      |
     | ------------- |:-------------:|
     | 200 OK | Resource Updated or **Created**. |
@@ -132,6 +134,7 @@ Rest server creates a unique representation of that requested resources and even
 
 3. **PATCH**
     Patch is used to modify a existing resource with replacing the Content.
+
     | Response        | Description      |
     | ------------- |:-------------:|
     | 200 OK | Resource Updated or **Created**. |
@@ -139,21 +142,26 @@ Rest server creates a unique representation of that requested resources and even
     | 404 | **Resource Not found**, if the resource is not found. |
     | 401 | Client is **not authorized** to create a resource. |
     | 405 | **Method Not Allowed**. If PUT is trying to update a collection. |
+
 4. **OPTIONS**
     Get the options available for the Resource.
     | Response        | Description      |
     | ------------- |:-------------:|
     | 200 OK | **Returned** the description. |
+
 5. **HEAD**
     Return just the header from the resource.
+
     | Response        | Description      |
     | ------------- |:-------------:|
     | 200 OK | **Returned** the description. |
     | 404 | **Resource Not found**, if the resource is not found. |
+
 6. **DELETE**
     Delete Single Resource. If try to delete a collection will get 405 :** Method Not Allowed** exception.
 7. **GET**
     Get the resource at the end of the address and send it to the client. Every time we refresh, move forward or backward in the browser, we use GET request.
+    
     | Response        | Description      |
     | ------------- |:-------------:|
     | 200 OK | Resource Received Successfully. |
